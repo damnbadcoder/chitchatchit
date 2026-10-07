@@ -11,8 +11,7 @@
   - Build a bare-bones test harness script (or minimal test view) that connects two physical phones and sends a 20 KB random byte stream every 5 seconds.
   - Assert that all 20 KB chunks arrive without bit rot or memory leaks.
   - **Emergency Fallback**: 
-  - Have Dev 1 build a simple local Wi-Fi / Multipeer / UDP broadcast bridge  
-     first, or use a high-level library like react-native-ble-plx for Milestone 1.
+    - Have Dev 1 build a simple local Wi-Fi / Multipeer / UDP broadcast bridge first, or use a high-level library like `react-native-ble-plx` for Milestone 1.
 
 
 ### Dev 2: Cryptography & Web of Trust
@@ -27,8 +26,8 @@
   - 100% Jest/Vitest unit test coverage.
   - Test Alice $\to$ Bob envelope sealing, trial decryption, and OTK destruction verification.
   - Test known cryptographic vectors for safety numbers and channel derivations.
-- **Emergency Fllback:**
-- Dev 2 falls back to standard libsodium / @noble/ciphers box() (standard  public-key authenticated encryption) and defers OTK forward secrecy to Milestone 4.
+  - **Emergency Fallback**: 
+    - Dev 2 falls back to standard libsodium / `@noble/ciphers` `box()` (standard public-key authenticated encryption) and defers OTK forward secrecy to Milestone 4.
 
 ### Dev 3: Protocol Framing, SQLite Store & Epidemic Mesh
 * **Tasks:**
@@ -42,8 +41,7 @@
   - Instantiate 3 in-memory instances of `MeshEngine` connected via a local mock `FakeTransport` (in-memory EventEmitter).
   - Simulate multi-hop epidemic sync: Node A sends to Node B; Node B walks to Node C; verify Node C receives the message without hardware.
   - **Emergency Fallback**: 
-  - Dev 3 keeps the store-and-forward relay queue in a plain in-memory  
-     JavaScript Map / Set for Milestone 1 and adds persistent SQLite in Milestone 2.
+    - Dev 3 keeps the store-and-forward relay queue in a plain in-memory JavaScript Map / Set for Milestone 1 and adds persistent SQLite in Milestone 2.
 
 
 ### Dev 4: UI, UX, Navigation & State Provider
@@ -59,21 +57,12 @@
 
 
 
-## Tasks for first Milestone (11 0ct):
-  Developer       | Task in Milestone 1                   | Demo Deliverable  
- -----------------|---------------------------------------|----------------------------------------  
-  Dev 1 (Radio)   | Build basic BLE Central + Peripheral  | Two phones pair and transfer raw text  
-                  | discovery. Establish a connection and | over BLE.  
-                  | send a raw string (< 180 bytes)       |  
-                  | across the characteristic.            |  
-  Dev 2 (Crypto)  | Single Ed25519/X25519 identity        | Function: encrypt(text, remotePubKey)  
-                  | generation + basic authenticated      | and decrypt().  
-                  | encryption (XChaCha20-Poly1305 or     |  
-                  | NaCl Box).                            |  
-  Dev 3 (Systems) | Minimal SQLite table for messages     | Messages persist and reload on app  
-                  | (id, text, timestamp, sender) and     | restart.  
-                  | direct message dispatch.              |  
-  Dev 4 (UI/UX)   | Single Chat screen + Peer Discovery   | Working UI showing discovered peers  
-                  | list + "Airplane Mode" status         | and chat bubbles.  
-                  | indicator.                            |
+## Tasks for First Milestone (11 Oct)
+
+| Developer | Task in Milestone 1 | Demo Deliverable |
+| :--- | :--- | :--- |
+| **Dev 1 (Radio)** | Build basic BLE Central + Peripheral discovery. Establish a connection and send a raw string (< 180 bytes) across the characteristic. | Two phones pair and transfer raw text over BLE. |
+| **Dev 2 (Crypto)** | Single Ed25519/X25519 identity generation + basic authenticated encryption (XChaCha20-Poly1305 or NaCl Box). | Function: `encrypt(text, remotePubKey)` and `decrypt()`. |
+| **Dev 3 (Systems)** | Minimal SQLite table for messages (`id`, `text`, `timestamp`, `sender`) and direct message dispatch. | Messages persist and reload on app restart. |
+| **Dev 4 (UI/UX)** | Single Chat screen + Peer Discovery list + "Airplane Mode" status indicator. | Working UI showing discovered peers and chat bubbles. |
 
