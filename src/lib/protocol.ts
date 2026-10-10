@@ -52,13 +52,23 @@ export function packEnvelope(params: {
     envelopeId?: Uint8Array;
     timestamp?: number;
 }) : Uint8Array {
+    const {
+        type,
+        payload,
+        ttlSeconds = DEFAULT_TTL_SECONDS,
+        maxHops = MAX_ALLOWED_HOPS,
+        hopCount = 0,
+        envelopeId = crypto.getRandomValues(new Uint8Array(16)),
+        timestamp = Date.now(),
+    } = params;
+
     if (payload.length > 30000) {
         throw new Error('Payload too large');
     }
     const paddedPayload = padToBucket(params.payload);
     const coarsenedTime = Math.floor(timestamp / TIME_BUCKET_MS) * TIME_BUCKET_MS;
     const out = new Uint8Array(HEADER_SIZE_BYTES + paddedPayload.length);
-    out[0] = MAGIC_BYTE_O;
+    out[0] = MAGIC_BYTE_0;
     out[1] = MAGIC_BYTE_1;
     out[2] = PROTOCOL_VERSION;
     out[3] = params.type;
